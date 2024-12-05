@@ -1,0 +1,47 @@
+enum PetType {
+    DOG
+    CAT
+    BIRD
+    FISH
+    REPTILE
+    OTHER
+}
+
+type Household {
+    id: ID!
+    name: String!
+    address: String
+    pets: [Pet]
+}
+
+type Pet {
+    id: ID!
+    name: String!
+    type: PetType!
+    birthDate: String
+    household: Household
+}
+
+type User {
+    id: ID!
+    username: String!
+    roles: [String!]!
+}
+
+type Query {
+    getAllHouseholds: [Household]
+    getHouseholdById(id: ID!): Household
+
+    getAllPets: [Pet]
+    getPetById(id: ID!): Pet
+}
+
+type Mutation {
+    createHousehold(name: String!, address: String): Household
+    updateHousehold(id: ID!, name: String, address: String): Household
+    deleteHousehold(id: ID!): Boolean
+
+    createPet(name: String!, type: PetType!, birthDate: String, householdId: ID): Pet
+    updatePet(id: ID!, name: String, type: PetType, birthDate: String, householdId: ID): Pet
+    deletePet(id: ID!): Boolean
+}
